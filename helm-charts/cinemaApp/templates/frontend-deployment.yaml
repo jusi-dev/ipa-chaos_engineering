@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cinema-frontend
+  labels:
+    app: cinema-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cinema-frontend
+  template:
+    metadata:
+      labels:
+        app: cinema-frontend
+    spec:
+      containers:
+        - name: cinema-frontend
+          image: jusiii/cinema_frontend:v2
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80

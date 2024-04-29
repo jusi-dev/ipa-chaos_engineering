@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cinema-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cinema-backend
+  template:
+    metadata:
+      labels:
+        app: cinema-backend
+    spec:
+      containers:
+      - name: cinema-backend
+        image: jusiii/cinema_backend:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4040
+      imagePullSecrets:
+      - name: my-secret
