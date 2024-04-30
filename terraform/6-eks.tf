@@ -67,3 +67,16 @@ resource "kubernetes_namespace" "application-ns" {
 
   depends_on = [null_resource.kubectl, aws_eks_cluster.cluster]
 }
+
+resource "kubernetes_namespace" "chaos-mesh-ns" {
+  metadata {
+    annotations = {
+      name = "ns-chaos-ipa-test-chaos-mesh"
+    }
+
+    name = "ns-chaos-ipa-test-chaos-mesh"
+  }
+
+  depends_on = [null_resource.kubectl, aws_eks_cluster.cluster]
+}
+

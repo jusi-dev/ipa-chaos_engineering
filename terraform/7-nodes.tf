@@ -51,16 +51,16 @@ resource "aws_eks_node_group" "private-nodes" {
   ]
 
   capacity_type  = "ON_DEMAND"
-  instance_types = ["t4g.small"]
+  instance_types = ["t4g.medium"]
 
   tags = {
     Name = "eks-chaos-ipa-ng-t4gsmall-test"
   }
 
   scaling_config {
-    desired_size = 2
-    max_size     = 5
-    min_size     = 1
+    desired_size = 3
+    max_size     = 10
+    min_size     = 2
   }
 
   update_config {

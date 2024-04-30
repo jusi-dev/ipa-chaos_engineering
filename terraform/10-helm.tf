@@ -66,6 +66,18 @@ resource "kubernetes_secret" "repo-secret" {
   }
 }
 
+resource "helm_release" "chaos-mesh-chart" {
+  name  = "chaos-mesh"
+  chart = "chaos-mesh"
+  namespace = "ns-chaos-ipa-test-chaos-mesh"
+
+  depends_on = [
+    aws_eks_node_group.private-nodes,
+    kubernetes_namespace.chaos-mesh-ns
+  ]
+
+}
+
 resource "helm_release" "cinemaApp-chart" {
   name  = "cinemaapp"
   chart = "../helm-charts/cinemaApp"
