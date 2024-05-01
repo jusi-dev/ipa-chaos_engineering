@@ -1,0 +1,28 @@
+kind: NetworkChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: kube-system # namespace where the chaos experiment will be created
+  name: bandwidth-chaos # name of the chaos experiment
+spec:
+  selector:
+    namespaces:
+      - kube-system # namespace where the chaos experiment will be applied
+    labelSelectors:
+      app.kubernetes.io/name: aws-load-balancer-controller # label of the pods where the chaos experiment will be applied
+  mode: all # mode of the chaos experiment
+  action: bandwidth # action of the chaos experiment
+  duration: 100s # duration of the chaos experiment
+  bandwidth:
+    rate: 10gbps # rate of the bandwidth
+    limit: 10000000 # limit of the bandwidth
+    buffer: 10000000 # buffer of the bandwidth
+    peakrate: 10000000 # peakrate of the bandwidth
+    minburst: 10000000 # minburst of the bandwidth
+  direction: to
+  target:
+    selector:
+      namespaces:
+        - kube-system # namespace where the chaos experiment will be applied
+      labelSelectors:
+        app.kubernetes.io/name: aws-load-balancer-controller # label of the pods where the chaos experiment will be applied
+    mode: all # mode of the chaos experiment

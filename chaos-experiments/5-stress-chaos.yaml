@@ -1,0 +1,20 @@
+kind: StressChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: ns-chaos-ipa-test-application # The namespace where the chaos experiment will be created
+  name: memeroy-chaos # The name of the chaos experiment
+spec:
+  selector:
+    namespaces:
+      - ns-chaos-ipa-test-application # The namespace where the target application is running
+    labelSelectors:
+      app: 'cinema-frontend' # The label of the target application
+  mode: all # The mode of the chaos experiment
+  stressors:
+    memory:
+      workers: 10 # The number of workers to stress memory
+      size: 1024mb # The size of memory to stress
+    cpu:
+      workers: 10 # The number of workers to stress CPU
+      load: 80 # The load of CPU to stress
+  duration: 5m # The duration of the chaos experiment

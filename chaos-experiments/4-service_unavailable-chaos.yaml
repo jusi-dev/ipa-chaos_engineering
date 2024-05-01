@@ -1,0 +1,14 @@
+kind: PodChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: ns-chaos-ipa-test-application # The namespace where the chaos experiment will be created
+  name: backend-unavailable # The name of the chaos experiment
+spec:
+  selector:
+    namespaces:
+      - ns-chaos-ipa-test-application # The namespace where the target application is running
+    labelSelectors:
+      app: cinema-backend # The label of the target application
+  mode: all # The mode of the chaos experiment
+  action: pod-failure # The action to perform on the pods
+  duration: 5m # The duration of the chaos experiment

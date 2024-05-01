@@ -1,0 +1,19 @@
+kind: HTTPChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: ns-chaos-ipa-test-application # The namespace where the chaos experiment will be created
+  name: abort-http-chaos # The name of the chaos experiment
+  annotations:
+    experiment.chaos-mesh.org/pause: 'true' # The annotation to pause the chaos experiment
+spec:
+  selector:
+    namespaces:
+      - ns-chaos-ipa-test-application # The namespace where the target application is running
+    labelSelectors:
+      app: cinema-frontend # The label of the target application
+  mode: all # The mode of the chaos experiment
+  target: Request # The target of the chaos experiment
+  abort: true # The action to perform on the HTTP request
+  port: 80 # The port of the target application
+  path: '*' # The path of the target application
+  duration: 5m # The duration of the chaos experiment

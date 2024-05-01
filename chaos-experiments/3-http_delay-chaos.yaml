@@ -1,0 +1,17 @@
+kind: HTTPChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: ns-chaos-ipa-test-application # The namespace where the chaos experiment will be created
+  name: http-delay-chaos # The name of the chaos experiment
+spec:
+  selector:
+    namespaces:
+      - ns-chaos-ipa-test-application # The namespace where the target application is running
+    labelSelectors:
+      app: cinema-frontend # The label of the target application
+  mode: all # The mode of the chaos experiment
+  target: Response # The target of the chaos experiment
+  delay: 10s # The delay of the HTTP response
+  port: 80 # The port of the target application
+  path: '*' # The path of the target application
+  duration: 180s # The duration of the chaos experiment

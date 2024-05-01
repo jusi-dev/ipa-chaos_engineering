@@ -1,0 +1,13 @@
+kind: PodChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: ns-chaos-ipa-test-application # The namespace where the chaos experiment will be created
+  name: fail-random-application-pods # The name of the chaos experiment
+spec:
+  selector:
+    namespaces:
+      - ns-chaos-ipa-test-application # The namespace where the target application is running
+  mode: random-max-percent # The mode of the chaos experiment
+  value: 70 # The percentage of pods to fail
+  action: pod-failure # The action to perform on the pods
+  duration: 5m # The duration of the chaos experiment
