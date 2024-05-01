@@ -67,15 +67,25 @@ resource "kubernetes_secret" "repo-secret" {
 }
 
 resource "helm_release" "chaos-mesh-chart" {
+  repository = "https://charts.chaos-mesh.org"
   name  = "chaos-mesh"
   chart = "chaos-mesh"
   namespace = "ns-chaos-ipa-test-chaos-mesh"
+
+  set {
+    name  = "chaosDaemon.runtime"
+    value = "containerd"
+  }
+
+  set {
+    name  = "chaosDaemon.socketPath"
+    value = "/run/containerd/containerd.sock"
+  }
 
   depends_on = [
     aws_eks_node_group.private-nodes,
     kubernetes_namespace.chaos-mesh-ns
   ]
-
 }
 
 resource "helm_release" "cinemaApp-chart" {
